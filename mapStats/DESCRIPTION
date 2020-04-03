@@ -1,0 +1,11 @@
+Package: mapStats
+Type: Package
+Title: Geographic Display of Survey Data Statistics
+Version: 2.4
+Date: 2015-4-17
+Author: Samuel Ackerman
+Maintainer: Samuel Ackerman <ackerman@temple.edu>
+Description: Automated calculation and visualization of survey data statistics on a color-coded map.
+Depends: R (>= 3.0.2), survey, lattice, maptools
+License: GPL (>= 2)
+Imports: RColorBrewer, Hmisc, classInt, sp, colorspace, reshape2
