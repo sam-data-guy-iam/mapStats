@@ -22,7 +22,7 @@ Examples are provided using the \code{\link{usMap}} shapefile with a synthetic d
 #plot the shapefile boundaries
 
 \dontrun{
-usMap <- readShapePoly(system.file("shapes/usMap.shp", package="mapStats")[1])
+usMap <- sf::as_Spatial(sf::st_read("shapes/usMap.shp", package="mapStats")[1]))
 head(usMap@data)
 plot(usMap)
 }
