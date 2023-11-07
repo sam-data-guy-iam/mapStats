@@ -11,7 +11,7 @@ Examples are provided using the \code{\link{usMap}} shapefile with a synthetic d
 %%  ~~ If necessary, more details than the __description__ above ~~
 %%}
 \source{
-\url{http://www.cdc.gov/brfss/maps/gis_data.htm}
+\url{https://www.cdc.gov/brfss/gis/gis_maps.htm}
 }
 %%\references{
 %%  ~~ possibly secondary sources and usages ~~
