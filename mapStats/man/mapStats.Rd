@@ -17,7 +17,7 @@ mapStats(d = NULL, main.var, stat = c("mean", "quantile"), quantiles = c(0.5, 0.
            col.label = "black", titles = NULL, cex.title = 1, var.pretty = main.var,
          geo.pretty = map.geo.var, by.pretty = by.var, as.table = TRUE, 
          sp_layout.pars = list(), between = list(y = 1), horizontal.fill = TRUE,
-         plotbyvar = ifelse( separate==1 & length(main.var)>1, FALSE, TRUE), 
+         plotbyvar = ifelse(separate == 1 & length(main.var) > 1, FALSE, TRUE), 
          num.row = 1, num.col = 1, ...) 
 
 calcStats(d, main.var, d.geo.var, stat = c("mean", "quantile"), quantiles = c(0.5, 0.75), 
@@ -181,9 +181,7 @@ overlay with \code{areas}, you would still need to enclose it in another list, f
 with attribute
 \item{variable}{    the name of the variable}
 }
-%%\references{
-%% ~put references to the literature/web site here ~
-%%}
+
 \author{
 Samuel Ackerman
 }
@@ -192,10 +190,9 @@ Please see the included demo file \code{map_examples} for examples on controllin
 coloring, and other customizable options, as well as more examples 
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-The \code{survey} package function \code{\link[survey]{svyby}} is used to calculate variable statistics, and \code{\link{spplot}} plots the map. 
+The \code{survey} package function \code{\link[survey]{svyby}} is used to calculate variable statistics, and \code{\link[sp]{spplot}} plots the map. 
 See the supplied demo \code{map_examples} for a fuller set of examples illustrating the range of parameter options.
 }
 \examples{
@@ -215,45 +212,44 @@ usMap <- sf::as_Spatial(sf::st_read(system.file("shapes/usMap.shp", package="map
 #sequential color palette with 4 groups.  In the titles, rename 'income'
 #by 'household income'.     
 
-mapStats(d=surveydata, main.var="income", d.geo.var="state", by.var="year",
-         wt.var="obs_weight", map.file=usMap, stat="mean", ngroups=4, 
-         paletteName="Reds", var.pretty="household income", map.label=TRUE)
+# save result in an object to suppress output
+
+res <- mapStats(d=surveydata, main.var="income", d.geo.var="state", by.var="year",
+				wt.var="obs_weight", map.file=usMap, stat="mean", ngroups=4,
+				paletteName="Reds", var.pretty="household income", map.label=TRUE)
 
 
 #Calculate the weighted mean and 40th and 50th quantiles of the variable income
 #by state, survey year, and education. Use three color palettes
 
-\dontrun{  
-mapStats(d=surveydata, main.var="income", d.geo.var="state", by.var=c("year","educ"),
-         wt.var="obs_weight", map.file=usMap, stat=c("mean","quantile"),     
-         quantiles=c(.4, .5), ngroups=6, paletteName=c("Reds","Greens","Blues"), 
-         var.pretty="household income", map.label=TRUE, num.col=1, num.row=2, 
-         layout=c(2,1), cex.label=.5)
+\donttest{
+res <- mapStats(d=surveydata, main.var="income", d.geo.var="state", 
+				by.var=c("year","educ"), wt.var="obs_weight", map.file=usMap,
+				stat=c("mean","quantile"), quantiles=c(.4, .5), ngroups=6,
+				paletteName=c("Reds","Greens","Blues"), 
+				var.pretty="household income", map.label=TRUE, num.col=1, 
+				num.row=2, layout=c(2,1), cex.label=.5)
 }
 
 #To calculate percentages of class variables, create an indicator variable, calculate
 #its mean, and override the default titles to say you are calculating the percentage.
 #Here we illustrate by calculating the percent of respondents by state that have income
 #above $20,000.
-
-\dontrun{
-mapStats(d=surveydata, main.var="income_ge30k", wt.var="obs_weight", 
-         map.file=usMap, d.geo.var="state", map.geo.var="STATE_ABBR", 
-         paletteName="Reds", stat=c("mean"), 
-         titles="Percent of respondents with income at least $30,000")
+\donttest{
+res <- mapStats(d=surveydata, main.var="income_ge30k", wt.var="obs_weight", 
+				map.file=usMap, d.geo.var="state", map.geo.var="STATE_ABBR", 
+				paletteName="Reds", stat=c("mean"), 
+				titles="Percent of respondents with income at least $30,000")
 }
-
-
 #calculating statistics using the functions outside of mapStats
-
-\dontrun{
-calcStats(d=surveydata, main.var="income", stat="mean", 
-          d.geo.var="state", by.var=c("year", "educ"), wt.var="obs_weight")
+\donttest{
+res <- calcStats(d=surveydata, main.var="income", stat="mean",
+				 d.geo.var="state", by.var=c("year", "educ"), 
+				 wt.var="obs_weight")
 }
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+
 \keyword{ color }
 \keyword{ dplot }
 \keyword{ print }
